@@ -246,3 +246,45 @@ JSCarousel.prototype.SetOpacityEffect = function() {
   }
 }
 
+// Method to move to the next image
+JSCarousel.prototype.Next = function() {
+  try {
+    // If we haven't passed all the images
+    // (go up to nbImg + range to slide til the last image disappears)
+    if (this._tgtImg < this._nbImg + this._range - 1) {
+      // Move to next image
+      this.SetTarget(this._tgtImg + 1);
+    // Else, we have passed all the images
+    } else {
+      // Restart from beginning
+      // (start at -range to put have the first image appearing from
+      // null at next step)
+      this._curImg = -1 * this._range;
+      this._tgtImg = this._curImg + 1;
+    }
+  } catch (err) {
+    console.log("JSCarousel.Next " + err.stack);
+  }
+}
+
+// Method to move to the next image
+JSCarousel.prototype.Prev = function() {
+  try {
+    // If we haven't passed all the images
+    // (go up to -range - 1 to slide til the first image disappears)
+    if (this._tgtImg > -1 * this._range) {
+      // Move to prev image
+      this.SetTarget(this._tgtImg - 1);
+    // Else, we have passed all the images
+    } else {
+      // Restart from end
+      // (start at nbImg + range - 2 to put have the last image appearing from
+      // null at next step)
+      this._tgtImg = this._nbImg + this._range - 2;
+      this._curImg = this._tgtImg + 1;
+    }
+  } catch (err) {
+    console.log("JSCarousel.Prev " + err.stack);
+  }
+}
+

@@ -40,7 +40,7 @@ function BodyOnLoad() {
 
 function Prev() {
   try {
-    theJSCarousel.SetTarget(theJSCarousel._tgtImg - 1);
+    theJSCarousel.Prev();
   } catch (err) {
     console.log("Prev " + err.stack);
   }
@@ -50,7 +50,7 @@ function Prev() {
 
 function Next() {
   try {
-    theJSCarousel.SetTarget(theJSCarousel._tgtImg + 1);
+    theJSCarousel.Next();
   } catch (err) {
     console.log("Next " + err.stack);
   }
@@ -122,20 +122,8 @@ function Play() {
 function Tick() {
   try {
     if (playing == 1) {
-      // If we haven't passed all the images
-      // (go up to nbImg + range to slide til the last image disappears)
-      if (theJSCarousel._tgtImg < 
-        theJSCarousel._nbImg + theJSCarousel._range - 1) {
-        // Move to next image
-        Next();
-      // Else, we have passed all the images
-      } else {
-        // Restart from beginning
-        // (start at -range to put have the first image appearing from
-        // null at next step)
-        theJSCarousel._curImg = -1 * theJSCarousel._range;
-        theJSCarousel._tgtImg = theJSCarousel._curImg + 1;
-      }
+      // Move to next image
+      Next();
     }
   } catch (err) {
     console.log("Tick " + err.stack);
